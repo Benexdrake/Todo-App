@@ -3,6 +3,7 @@ from db_context import DBContext as dbc
 class TodoDBContext:
     def __init__(self):
         self.db_context = dbc("todo.db")
+        self.create_todo_item_table()
 
     def create_todo_item_table(self):
         create_table = """
