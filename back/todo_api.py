@@ -38,4 +38,4 @@ def delete(task_id):
 
 
 def run():
-    app.run(debug=True)
+    app.run(debug=False, port=5555)
