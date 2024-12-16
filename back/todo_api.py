@@ -12,7 +12,7 @@ def add():
     return jsonify(item);
 
 
-@app.route("get_items", methods=["GET"])
+@app.route("/get_items", methods=["GET"])
 def get_all():
     db = tdbc()
     items = []
@@ -22,7 +22,7 @@ def get_all():
     return jsonify(items);
 
 
-@app.route("update-item", methods=["PUT"])
+@app.route("/update-item", methods=["PUT"])
 def update():
     item = request.get_json()
     db = tdbc()
@@ -30,7 +30,7 @@ def update():
     return jsonify(item);
 
 
-@app.route("delete-item/<task_id>", methods=["DELETE"])
+@app.route("/delete-item/<task_id>", methods=["DELETE"])
 def delete(task_id):
     db = tdbc()
     db.delete_task(task_id)
@@ -38,4 +38,4 @@ def delete(task_id):
 
 
 def run():
-    app.run(debug=False)
+    app.run(debug=True)
