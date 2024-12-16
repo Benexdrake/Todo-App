@@ -3,9 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
     <title>Todo App</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <h1 class="title">Meine Todo Liste</h1>
+    <div class="main">
+        <div class="input_block">
+            <form action="">
+                <label for="">Add Todo:</label>
+                <input type="text" name="add_todo_input" id="add_todo_input">
+                <button type="submit" id="add_todo">Submit</button>
+            </form>
+        </div>
+        <div class="todos_block">
+            <ol>
+                <li class="todo">
+                    <div>
+                        <input type="checkbox" name="">
+                    </div>
+                    <div>
+                        <span class="todo_text">Heute kaufe ich 3 Bananen.</span>
+                    </div>
+                    <div>
+                        <button class="delete_button">X</button>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </div>
 </body>
 </html>
