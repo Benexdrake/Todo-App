@@ -1,6 +1,9 @@
 import { createTask, getTasks, updateTask, deleteTask  } from "./todo_service.js";
+import {getPriorityColor} from './helper.js'
 
-let createTodo = (id,task,date,priority, finished) =>
+
+
+let createTaskBlock = (id,task,date,priority, finished) =>
 {
     let item = document.createElement('li')
     item.className = 'todo';
@@ -24,26 +27,14 @@ let createTodo = (id,task,date,priority, finished) =>
     
     mid.style.width = '80%'
 
-    let borderColor = "red"
-    switch(priority)
-    {
-        case 1:
-            borderColor = "red";
-            break;
-        case 2:
-            borderColor = "yellow";
-            break;
-        case 3:
-            borderColor = "green";
-            break;
-    }
+    let borderColor = getPriorityColor(priority)
 
     item.style.border = `2px solid ${borderColor}`
 
     input.type = 'checkbox';
     input.checked = finished;
     input.addEventListener('change', (event) => {
-        console.log(input.checked)
+        // console.log(input.checked)
     })
     span.className = 'todo_text';
     span.innerText = task;
@@ -68,7 +59,7 @@ let createTodo = (id,task,date,priority, finished) =>
 }
 
 // Show Todos
-let showTodos = async () =>
+let showTasks = async () =>
 {
     let todoList = document.getElementById('todo_list');
 
@@ -78,11 +69,11 @@ let showTodos = async () =>
     for(let task of tasks)
     {
         console.log(task)
-        let item = createTodo(task.id, task.task, task.date, task.priority, task.finished);
+        let item = createTaskBlock(task.id, task.task, task.date, task.priority, task.finished);
         todoList.appendChild(item);
     }
 }
 
 // Filter Todos by X
 
-showTodos();
+showTasks();
