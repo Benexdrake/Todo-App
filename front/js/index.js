@@ -1,3 +1,5 @@
+import { createTask, getTasks, updateTask, deleteTask  } from "./todo_service";
+
 let createTodo = (id,task,date,priority, finished) =>
 {
     let item = document.createElement('li')
@@ -66,8 +68,12 @@ let createTodo = (id,task,date,priority, finished) =>
 }
 
 // Show Todos
-let showTodos = () =>
+let showTodos = async () =>
 {
+    let tasks = await getTasks();
+
+    console.log(tasks)
+
     let todoList = document.getElementById('todo_list');
     for(let i = 0; i < 5; i++)
     {
