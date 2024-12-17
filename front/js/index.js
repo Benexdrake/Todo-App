@@ -1,4 +1,4 @@
-import { createTask, getTasks, updateTask, deleteTask  } from "./todo_service";
+// import { createTask, getTasks, updateTask, deleteTask  } from "./todo_service";
 
 let createTodo = (id,task,date,priority, finished) =>
 {
@@ -57,7 +57,7 @@ let createTodo = (id,task,date,priority, finished) =>
 
     let p = document.createElement('p')
     p.style.textAlign = 'end';
-    p.innerText = date.toLocaleDateString()
+    p.innerText = date
 
     mid.appendChild(p)
     div2.appendChild(input)
@@ -70,14 +70,15 @@ let createTodo = (id,task,date,priority, finished) =>
 // Show Todos
 let showTodos = async () =>
 {
-    let tasks = await getTasks();
-
-    console.log(tasks)
-
     let todoList = document.getElementById('todo_list');
-    for(let i = 0; i < 5; i++)
+
+    // let tasks = await getTasks();
+    let tasks = await fetch(`http://localhost:8000/get-tasks`).then(x => {return x.json()});
+
+    for(let task of tasks)
     {
-        let item = createTodo(1, "I want to buy Bananas for DK", new Date(), 2, true);
+        console.log(task)
+        let item = createTodo(task.id, task.task, task.date, task.priority, task.finished);
         todoList.appendChild(item);
     }
 }
