@@ -1,6 +1,14 @@
 from todo_db_context import TodoDBContext as tdbc
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+class Base(BaseModel):
+    task_id:int
+    task:str
+    date:str
+    priority:int
+    finished:bool
 
 
 app = FastAPI()
@@ -23,10 +31,10 @@ def home():
 
 
 @app.post("/add-task")
-def add(item):
+def add(item:Base):
     db = tdbc()
-    db.add_task(item["task"], item["date"], item["priority"], item["finished"])
-    return jsonify(item);
+    db.add_task(item.task, item.date, item.priority, item.finished)
+    return item;
 
 
 @app.get("/get-tasks")
@@ -40,13 +48,13 @@ def get_all():
 
 
 @app.put("/update-task")
-def update(item):
+def update(item:Base):
     db = tdbc()
-    db.update_task(item["id"], item["task"], item["date"], item["priority"], item["finished"])
+    db.update_task(item.task_id, item.task, item.date, item.priority, item.finished)
     return item;
 
 
-@app.delete("/delete-task/<task_id>")
+@app.delete("/delete-task/{task_id}")
 def delete(task_id):
     db = tdbc()
     db.delete_task(task_id)
