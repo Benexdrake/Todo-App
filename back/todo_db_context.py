@@ -7,30 +7,31 @@ class TodoDBContext:
 
     def create_todo_item_table(self):
         create_table = """
-        CREATE TABLE IF NOT EXISTS Items
+        CREATE TABLE IF NOT EXISTS Tasks
         (
             id INTEGER PRIMARY KEY,
             task varchar(128),
             date DATE,
-            priority int
+            priority INTEGER,
+            finished INTEGER
         )
         """
         self.db_context.create_database(create_table)
 
-    def add_task(self, task, date, priority):
+    def add_task(self, task, date, priority, finished):
         self.db_context.execute(f"""
-                                    INSERT INTO items (task, date, priority)
+                                    INSERT INTO tasks (task, date, priority, finished)
                                     values
-                                    ('{task}', '{date}', {priority});
+                                    ('{task}', '{date}', {priority}, {finished});
                                 """)
 
     def get_tasks(self):
-        return self.db_context.execute('SELECT * FROM items;')
+        return self.db_context.execute('SELECT * FROM tasks;')
 
-    def update_task(self, id, task, date, priority):
-        self.cursor.execute(f'''UPDATE todo SET task = "{task}", date = "{date}", priority = {priority} where id == {id}''')
+    def update_task(self, id, task, date, priority, finished):
+        self.cursor.execute(f'''UPDATE tasks SET task = "{task}", date = "{date}", priority = {priority}, finished = {finished} where id == {id}''')
 
     def delete_task(self, id):
         self.db_context.execute(f"""
-                                DELETE FROM items WHERE id = {id};
+                                DELETE FROM tasks WHERE id = {id};
                                 """)
