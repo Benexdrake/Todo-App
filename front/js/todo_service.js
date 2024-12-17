@@ -1,10 +1,21 @@
 // Needed:
 const url = 'http://localhost:8000'
 
-// Create Task and Send to API
-export let createTask = async (task, date, priority, finished) => 
+let requestOptions = (item, method) => 
 {
-    await fetch(`${url}/add-tasks`, {task, date, priority, finished});
+    return {
+        method,
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify(item) 
+    };
+}
+
+
+// Create Task and Send to API
+export let createTask = async (task, date, priority) => 
+{
+    let item = {"task_id":0, task, date, priority, "finished":false};
+    return await fetch(`${url}/add-task`, requestOptions(item, 'POST'));
 }
 
 // Get Tasks from API
@@ -14,9 +25,11 @@ export let getTasks = async () =>
 }
     
 // Update Task and Send Update to API
-export let updateTask = async (id, task, date, priority, finished) =>
+export let updateTask = async (task_id, task, date, priority, finished) =>
 {
-    await fetch(`${url}/update-task`, {id, task, date, priority, finished});
+    let item = {task_id,task, date, priority, finished};
+    console.log(item)
+    await fetch(`${url}/update-task`, requestOptions(item, 'PUT'));
 }
 
 

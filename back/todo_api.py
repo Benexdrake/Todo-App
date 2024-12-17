@@ -33,7 +33,7 @@ def home():
 @app.post("/add-task")
 def add(item:Base):
     db = tdbc()
-    db.add_task(item.task, item.date, item.priority, item.finished)
+    db.add_task(item.task, item.date, item.priority, False)
     return item;
 
 

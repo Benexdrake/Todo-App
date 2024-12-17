@@ -32,6 +32,8 @@ body{
     background-color: var(--color1);
     padding: 16px;
     border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
 }
 
 #add_todo_input {

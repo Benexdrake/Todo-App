@@ -28,8 +28,8 @@ class TodoDBContext:
     def get_tasks(self):
         return self.db_context.execute('SELECT * FROM tasks;')
 
-    def update_task(self, id, task, date, priority, finished):
-        self.cursor.execute(f'''UPDATE tasks SET task = "{task}", date = "{date}", priority = {priority}, finished = {finished} where id == {id}''')
+    def update_task(self, task_id, task, date, priority, finished):
+        return self.db_context.execute(f'''UPDATE tasks SET task = "{task}", date = "{date}", priority = {priority}, finished = {finished} where id == {task_id}''')
 
     def delete_task(self, id):
         self.db_context.execute(f"""
