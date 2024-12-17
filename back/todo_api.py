@@ -1,45 +1,53 @@
 from todo_db_context import TodoDBContext as tdbc
-from flask import Flask, request, jsonify
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+app = FastAPI()
+
+origins = [
+    "*",
+]
+
+app.add_middleware( 
+    CORSMiddleware, 
+    allow_origins=origins, 
+    allow_credentials=True, 
+    allow_methods=["*"], 
+    allow_headers=["*"]
+    )
+
+@app.get('/')
 def home():
     return 'Hello World'
 
 
-@app.route("/add-task",methods=["POST"])
-def add():
-    item = request.get_json()
+@app.post("/add-task")
+def add(item):
     db = tdbc()
     db.add_task(item["task"], item["date"], item["priority"], item["finished"])
     return jsonify(item);
 
 
-@app.route("/get-tasks", methods=["GET"])
+@app.get("/get-tasks")
 def get_all():
     db = tdbc()
     items = []
     result = db.get_tasks()
     for r in result:
         items.append({"id":r[0],"task":r[1],"date":r[2],"priority":r[3], "finished": r[4]})
-    return jsonify(items);
+    return items;
 
 
-@app.route("/update-task", methods=["PUT"])
-def update():
-    item = request.get_json()
+@app.put("/update-task")
+def update(item):
     db = tdbc()
     db.update_task(item["id"], item["task"], item["date"], item["priority"], item["finished"])
-    return jsonify(item);
+    return item;
 
 
-@app.route("/delete-task/<task_id>", methods=["DELETE"])
+@app.delete("/delete-task/<task_id>")
 def delete(task_id):
     db = tdbc()
     db.delete_task(task_id)
-    return({})
-
-
-def run():
-    app.run(debug=False, port=5555)
+    return {}
