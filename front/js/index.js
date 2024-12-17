@@ -1,4 +1,4 @@
-// import { createTask, getTasks, updateTask, deleteTask  } from "./todo_service";
+import { createTask, getTasks, updateTask, deleteTask  } from "./todo_service.js";
 
 let createTodo = (id,task,date,priority, finished) =>
 {
@@ -10,6 +10,10 @@ let createTodo = (id,task,date,priority, finished) =>
     let left = document.createElement('div')
     let mid = document.createElement('div')
     let right = document.createElement('div')
+    let button = document.createElement('button')
+    let input = document.createElement('input');
+    let span = document.createElement('span')
+    let p = document.createElement('p')
 
     left.appendChild(div1)
     left.appendChild(div2)
@@ -17,9 +21,8 @@ let createTodo = (id,task,date,priority, finished) =>
     item.appendChild(left)
     item.appendChild(mid)
     item.appendChild(right)
-
+    
     mid.style.width = '80%'
-
 
     let borderColor = "red"
     switch(priority)
@@ -37,16 +40,14 @@ let createTodo = (id,task,date,priority, finished) =>
 
     item.style.border = `2px solid ${borderColor}`
 
-    let input = document.createElement('input');
     input.type = 'checkbox';
     input.checked = finished;
     input.addEventListener('change', (event) => {
         console.log(input.checked)
     })
-    let span = document.createElement('span')
     span.className = 'todo_text';
     span.innerText = task;
-    let button = document.createElement('button')
+    
     button.className = 'delete_button';
     button.innerText = 'X'
     button.addEventListener('click', () => {
@@ -55,7 +56,6 @@ let createTodo = (id,task,date,priority, finished) =>
         item.remove();
     })
 
-    let p = document.createElement('p')
     p.style.textAlign = 'end';
     p.innerText = date
 
@@ -72,8 +72,8 @@ let showTodos = async () =>
 {
     let todoList = document.getElementById('todo_list');
 
-    // let tasks = await getTasks();
-    let tasks = await fetch(`http://localhost:8000/get-tasks`).then(x => {return x.json()});
+    let tasks = await getTasks();
+    // let tasks = await fetch(`http://localhost:8000/get-tasks`).then(x => {return x.json()});
 
     for(let task of tasks)
     {
