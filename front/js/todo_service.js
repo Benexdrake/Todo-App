@@ -23,5 +23,5 @@ export let updateTask = async (id, task, date, priority, finished) =>
 // Delete Task and Delete send to API
 export let deleteTask = async (task_id) =>
 {
-    await fetch(`${url}/delete-task/${task_id}`);
+    await fetch(`${url}/delete-task/${task_id}`, {method:'DELETE'});
 }

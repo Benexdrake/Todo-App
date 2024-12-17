@@ -41,10 +41,12 @@ let createTaskBlock = (id,task,date,priority, finished) =>
     
     button.className = 'delete_button';
     button.innerText = 'X'
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
         // Send delete with Service to API
         // Maybe a 'Are u sure?' Question first
         item.remove();
+        await deleteTask(id);
+
     })
 
     p.style.textAlign = 'end';
@@ -68,7 +70,6 @@ let showTasks = async () =>
 
     for(let task of tasks)
     {
-        console.log(task)
         let item = createTaskBlock(task.id, task.task, task.date, task.priority, task.finished);
         todoList.appendChild(item);
     }
