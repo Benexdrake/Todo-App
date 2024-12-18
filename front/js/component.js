@@ -1,4 +1,4 @@
-import { createTask, getTasks, updateTask, deleteTask  } from "./todo_service.js";
+import { createTask, updateTask, deleteTask  } from "./todo_service.js";
 import {getPriorityColor} from './helper.js'
 
 let task_text = '';
@@ -65,12 +65,9 @@ export let createInsertTaskBlock = () =>
     })
     
     submitButton.addEventListener('click', async () => {
-        
         await createTask(task_text,date,priority);
     })
-    
 }
-
 
 export let createTaskBlock = (id,task,date,priority, finished) =>
 {

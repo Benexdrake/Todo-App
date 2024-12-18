@@ -10,7 +10,6 @@ let requestOptions = (item, method) =>
     };
 }
 
-
 // Create Task and Send to API
 export let createTask = async (task, date, priority) => 
 {
