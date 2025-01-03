@@ -1,0 +1,98 @@
+:root {
+    --color1: #303841;
+    --color2: #3A4750;
+    --color3: #EA9215;
+    --color4: #EEEEEE;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--color4);
+}
+
+body{
+    background-color: var(--color2);
+}
+
+.title {
+    text-align: center;
+    margin: 16px;
+}
+
+.main {
+    margin: auto;
+    width: 800px;
+    height: 800px;
+}
+
+.input_block {
+    text-align: center;
+    background-color: var(--color1);
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#add_todo_input {
+    color: var(--color1);
+    padding: 6px;
+    width: 440px;
+}
+
+#add_todo {
+    background-color: var(--color3);
+    border: none;
+    padding: 8px;
+    border-radius: 2px;
+}
+
+.todo {
+    list-style: none;
+    background-color: var(--color1);
+    padding: 16px;
+    margin: 8px 0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.todo input {
+    width: 20px;
+    height: 20px;
+}
+
+.todo_text {
+    
+}
+
+.delete_button {
+    background-color: red;
+    border-radius: 4px;
+    border: none;
+    font-size: 2rem;
+    padding: 8px 12px;
+}
+
+#priority {
+    padding: 8px;
+    color: var(--color4);
+    border: none;
+    background-color: var(--color2);
+}
+
+#priority option{
+    color: var(--color4);
+    background-color: var(--color2);
+}
+
+#input_date {
+    color: var(--color4);
+    background-color: var(--color1);
+    border: none;
+    font-size: 1.2rem;
+}
+
