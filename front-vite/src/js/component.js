@@ -4,7 +4,6 @@ import {getPriorityColor} from './helper.js'
 let task_text = '';
 let date = '';
 let priority = 1;
-let finished = false;
 
 export let createInsertTaskBlock = () =>
 {
